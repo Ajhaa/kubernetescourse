@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uuid-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uuid
+  template:
+    metadata:
+      labels:
+        app: uuid
+    spec:
+      volumes:
+        - name: uuid
+          persistentVolumeClaim:
+            claimName: uuid-ping-claim
+      containers:
+        - name: stamper
+          image: ajhaa/stamper
+          volumeMounts: # Mount volume
+          - name: uuid
+            mountPath: /app/shared/
+        - name: displayer
+          image: ajhaa/displayer
+          volumeMounts: # Mount volume
+          - name: uuid
+            mountPath: /app/shared/

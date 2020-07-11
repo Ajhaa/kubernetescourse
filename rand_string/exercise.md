@@ -1,0 +1,15 @@
+# 1.01
+## Commands used
+
+`kubectl create deployment uuid-deb --image=ajhaa/uuid`  
+`kubectl logs -f uuid-deb-7dff5559cd-cpz2s`
+
+### output
+```
+2020-07-10T09:31:59.119Z b2e92d64-33fc-4751-96c3-60369cbe7257
+2020-07-10T09:32:04.120Z b2e92d64-33fc-4751-96c3-60369cbe7257
+2020-07-10T09:32:09.125Z b2e92d64-33fc-4751-96c3-60369cbe7257
+2020-07-10T09:32:14.131Z b2e92d64-33fc-4751-96c3-60369cbe7257
+2020-07-10T09:32:19.139Z b2e92d64-33fc-4751-96c3-60369cbe7257
+
+```

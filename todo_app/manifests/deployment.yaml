@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todoapp
+  template:
+    metadata:
+      labels:
+        app: todoapp
+    spec:
+      volumes:
+        - name: todoapp
+          persistentVolumeClaim:
+            claimName: uuid-ping-claim
+      containers:
+        - name: todoapp
+          image: ajhaa/kube_todoapp
+          volumeMounts: # Mount volume
+          - name: todoapp
+            mountPath: /app/shared/
