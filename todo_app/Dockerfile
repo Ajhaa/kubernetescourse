@@ -14,6 +14,6 @@ RUN mkdir shared
 COPY server/package* /app/
 RUN npm ci
 COPY server .
-COPY --from=client /client/public/build ./public
+COPY --from=client /client/public ./public
 
 CMD ["npm", "start"]

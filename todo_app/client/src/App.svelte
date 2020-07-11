@@ -31,7 +31,7 @@
 			<li>{todo}</li>
 		{/each}
 		</ul>	
-		<img width="500" src="http://localhost:3000/api/image" alt="img of the day">
+		<img width="500" src="http://localhost:8081/api/image" alt="img of the day">
 </main>
 
 <style>
