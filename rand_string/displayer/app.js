@@ -39,7 +39,7 @@ const server = http.createServer((_, res) => {
   try {
     const stamp = fs.readFileSync('/app/shared/stamp.txt')
     const pingpong = fs.readFileSync('/app/shared/pong.txt')
-    res.write(stamp + ' ' + uuid + '\nPings / Pongs' + pingpong)
+    res.write(stamp + ' ' + uuid + '\nPings / Pongs: ' + pingpong)
   } catch (e) {
     res.write('read failed')
   }
