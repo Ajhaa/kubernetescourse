@@ -1,6 +1,7 @@
 // https://gist.github.com/Ajhaa/b46efdc5510b41d7df0cb33dbcd1b5e5
 const crypto = require('crypto')
 const http = require('http');
+const fetch = require('node-fetch')
 const fs = require('fs')
 
 function toHexString(byteArr) {
@@ -34,13 +35,17 @@ function uuidv4() {
 
 const uuid = uuidv4()
 
-const server = http.createServer((_, res) => {
+const server = http.createServer(async (_, res) => {
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
   try {
+    const fetchRes = await fetch('http://pingpong-svc/pingpong/api')
+    const json = await fetchRes.json()
+    const pingpong = json.pings
+
     const stamp = fs.readFileSync('/app/shared/stamp.txt')
-    const pingpong = fs.readFileSync('/app/shared/pong.txt')
     res.write(stamp + ' ' + uuid + '\nPings / Pongs: ' + pingpong)
   } catch (e) {
+    console.log(e)
     res.write('read failed')
   }
   res.end()

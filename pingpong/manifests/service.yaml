@@ -8,5 +8,10 @@ spec:
     app: pingpong
   ports:
     - port: 2300
+      name: external
+      protocol: TCP
+      targetPort: 3000
+    - port: 80
+      name: internal
       protocol: TCP
       targetPort: 3000
