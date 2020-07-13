@@ -18,7 +18,7 @@ async function cacheDate (date) {
 }
 
 
-app.get('/api', (req, res) => {
+app.get('/api', (_, res) => {
   res.json({ message: 'hello from root' })
 })
 

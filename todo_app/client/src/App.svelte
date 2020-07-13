@@ -1,29 +1,24 @@
 <script>
 	let newTodo = ''
 
-	function onChange(event) {
-		console.log(event)
-		if (event.target.value.length <= 140) {
-
-			newTodo = event.target.value
-		}
-	}
-
-	function submit() {
-		console.log(todo)
-	}
-
 	let todos = [
 		'Do it!',
 		`Don't let your dreams be dreams`,
 		`It's time to stop`
 	]
+
+	function submit() {
+		todos = todos.concat(newTodo)
+	}
 </script>
 
 <main>
 	<h1>TODOAPP</h1>
 		<h3>new todo</h3>
-		<textarea value={newTodo} on:input={onChange} />
+		<div>
+			<textarea style="width: 320px; margin: 0px;" rows="5" maxlength="140" bind:value={newTodo} />
+			<div style="font-size: 13px; font-weigth: 100;">{newTodo.length}/140</div>
+		</div>
 
 		<button on:click={submit}>submit</button>
 		<ul>
