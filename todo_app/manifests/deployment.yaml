@@ -17,8 +17,10 @@ spec:
           persistentVolumeClaim:
             claimName: uuid-ping-claim
       containers:
-        - name: todoapp
-          image: ajhaa/kube_todoapp
+        - name: todoapp-back
+          image: ajhaa/kube_todoapp_back
           volumeMounts: # Mount volume
           - name: todoapp
             mountPath: /app/shared/
+        - name: todoapp-front
+          image: ajhaa/kube_todoapp_front

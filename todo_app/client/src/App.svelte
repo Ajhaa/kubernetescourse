@@ -1,14 +1,26 @@
 <script>
+	import { onMount } from 'svelte'
+
+	export let apiUrl
+
 	let newTodo = ''
+	let todos = []
 
-	let todos = [
-		'Do it!',
-		`Don't let your dreams be dreams`,
-		`It's time to stop`
-	]
+	onMount(async () => {
+		const res = await fetch(apiUrl + '/todos')
+		todos = await res.json()
+	})
 
-	function submit() {
-		todos = todos.concat(newTodo)
+	async function submit() {
+		const res = await fetch(apiUrl + '/todos', 
+			{ 
+				method: 'POST',
+				body: JSON.stringify({ todo: newTodo }),
+				headers: new Headers({ 'Content-Type': 'application/json' })
+		})
+
+		todos = await res.json()
+		newTodo = ''
 	}
 </script>
 
@@ -23,10 +35,10 @@
 		<button on:click={submit}>submit</button>
 		<ul>
 		{#each todos as todo}
-			<li>{todo}</li>
+			<li>{todo.content}</li>
 		{/each}
 		</ul>	
-		<img width="500" src="http://localhost:8081/api/image" alt="img of the day">
+		<img width="500" src={apiUrl + '/image'} alt="img of the day">
 </main>
 
 <style>

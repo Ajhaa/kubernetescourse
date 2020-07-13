@@ -6,7 +6,11 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /api
         backend:
           serviceName: todoapp-svc
           servicePort: 2345
+      - path: /
+        backend:
+          serviceName: todoapp-svc
+          servicePort: 2346
