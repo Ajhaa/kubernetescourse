@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: uuid-dep
+  namespace: exercises
 spec:
   replicas: 1
   selector:
@@ -27,3 +28,9 @@ spec:
           volumeMounts: # Mount volume
           - name: uuid
             mountPath: /app/shared/
+          env:
+          - name: MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: uuid-config           
+                key: message

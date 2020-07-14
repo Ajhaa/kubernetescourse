@@ -4,6 +4,8 @@ const http = require('http');
 const fetch = require('node-fetch')
 const fs = require('fs')
 
+const MESSAGE = process.env.MESSAGE || ''
+
 function toHexString(byteArr) {
   return Array.from(byteArr).map(e => {
     const str = e.toString(16)
@@ -43,7 +45,7 @@ const server = http.createServer(async (_, res) => {
     const pingpong = json.pings
 
     const stamp = fs.readFileSync('/app/shared/stamp.txt')
-    res.write(stamp + ' ' + uuid + '\nPings / Pongs: ' + pingpong)
+    res.write(`${MESSAGE}\n${stamp} ${uuid}\nPings / Pongs: ${pingpong}`)
   } catch (e) {
     console.log(e)
     res.write('read failed')

@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: uuid-ingress
+  namespace: exercises
 spec:
   rules:
   - http:
