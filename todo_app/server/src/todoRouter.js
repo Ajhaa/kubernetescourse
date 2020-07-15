@@ -19,17 +19,30 @@ async function connect() {
 connect()
 
 todoRouter.get('/', async (_, res) => {
-  const dbRes = await pool.query('SELECT * FROM todos')
+  try {
+    const dbRes = await pool.query('SELECT * FROM todos')
 
-  res.json(dbRes.rows)
+    res.json(dbRes.rows)
+  } catch(e) {
+    res.status(500).json({ error: 'internal server error' })
+  }
 })
 
 todoRouter.post('/', async (req, res) => {
-  if (!req.body.todo) {
-    return res.status(400).end()
+  const { todo } = req.body
+  if (!todo) {
+    return res.status(400).json({ error: 'no todo in request body' })
   }
 
-  await pool.query('INSERT INTO todos (content, done) VALUES ($1, $2)', [req.body.todo, false])
+  if (todo.length > 140) {
+    return res.status(400).json({ error: 'todo is longer than 140 characters' })
+  }
+
+  try {
+    await pool.query('INSERT INTO todos (content, done) VALUES ($1, $2)', [req.body.todo, false])
+  } catch(e) {
+    return res.status(500).json({ error: 'internal server error' })
+  }
   const dbRes = await pool.query('SELECT * FROM todos')
 
   res.json(dbRes.rows)
