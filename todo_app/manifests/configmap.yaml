@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-config
+  namespace: todoapp-namespace
+data:
+  postgres-password: aHR0cHM6Ly9kZXZvcHN3aXRoa3ViZXJuZXRlcy5jb20vcGFydDIv

@@ -23,5 +23,17 @@ spec:
           volumeMounts: # Mount volume
           - name: todoapp
             mountPath: /app/shared/
+          env:
+            - name: PGHOST
+              value: todo-postgres-svc
+            - name: PGUSER
+              value: postgres
+            - name: PGPASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-config          
+                  key: postgres-password
+            - name: PGDATA
+              value: /data
         - name: todoapp-front
           image: ajhaa/kube_todoapp_front
