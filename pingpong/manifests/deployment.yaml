@@ -20,6 +20,13 @@ spec:
       containers:
         - name: pingpong
           image: ajhaa/pingpong:latest
+          env:
+            - name: PGHOST
+              value: postgres-svc
+            - name: PGUSER
+              value: postgres
+            - name: PGPASSWORD
+              value: verysecret
           volumeMounts: # Mount volume
           - name: pingpong
             mountPath: /app/shared/

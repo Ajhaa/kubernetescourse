@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: todoapp-ingress
-  namespace: exercises
+  namespace: todoapp-namespace
 spec:
   rules:
   - http:

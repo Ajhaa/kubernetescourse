@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-app
-  namespace: exercises
+  namespace: todoapp-namespace
 spec:
   replicas: 1
   selector:
@@ -16,7 +16,7 @@ spec:
       volumes:
         - name: todoapp
           persistentVolumeClaim:
-            claimName: uuid-ping-claim
+            claimName: todo-claim
       containers:
         - name: todoapp-back
           image: ajhaa/kube_todoapp_back
