@@ -13,3 +13,7 @@ spec:
       name: external
       protocol: TCP
       targetPort: 3000
+    - port: 80
+      name: internal
+      protocol: TCP
+      targetPort: 3000

@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: uuid-dep
   namespace: exercises
 spec:
+  serviceName: uuid-svc
   replicas: 1
   selector:
     matchLabels:
@@ -13,10 +14,6 @@ spec:
       labels:
         app: uuid
     spec:
-      volumes:
-        - name: uuid
-          persistentVolumeClaim:
-            claimName: uuid-ping-claim
       containers:
         - name: stamper
           image: ajhaa/stamper
@@ -25,6 +22,9 @@ spec:
             mountPath: /app/shared/
         - name: displayer
           image: ajhaa/displayer
+          ports:
+            - containerPort: 3000
+              protocol: TCP
           volumeMounts: # Mount volume
           - name: uuid
             mountPath: /app/shared/
@@ -34,3 +34,11 @@ spec:
               configMapKeyRef:
                 name: uuid-config           
                 key: message
+  volumeClaimTemplates:
+    - metadata:
+        name: uuid
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi

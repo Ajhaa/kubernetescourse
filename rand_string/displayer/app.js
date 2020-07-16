@@ -40,7 +40,7 @@ const uuid = uuidv4()
 const server = http.createServer(async (_, res) => {
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
   try {
-    const fetchRes = await fetch('http://pingpong-svc/pingpong/api')
+    const fetchRes = await fetch('http://pingpong/pingpong/api')
     const json = await fetchRes.json()
     const pingpong = json.pings
 

@@ -4,10 +4,10 @@ metadata:
   name: uuid-svc
   namespace: exercises
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: uuid
   ports:
-    - port: 2300
+    - port: 3200
       protocol: TCP
       targetPort: 3000
