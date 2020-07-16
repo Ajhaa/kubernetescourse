@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pingpong-dep
+  name: pingpong
   namespace: exercises
 spec:
   replicas: 1
@@ -13,13 +13,12 @@ spec:
       labels:
         app: pingpong
     spec:
-      volumes:
-        - name: pingpong
-          persistentVolumeClaim:
-            claimName: uuid-ping-claim
       containers:
         - name: pingpong
           image: ajhaa/pingpong:latest
+          ports:
+            - containerPort: 3000
+              protocol: TCP
           env:
             - name: PGHOST
               value: postgres-svc
@@ -27,6 +26,3 @@ spec:
               value: postgres
             - name: PGPASSWORD
               value: verysecret
-          volumeMounts: # Mount volume
-          - name: pingpong
-            mountPath: /app/shared/

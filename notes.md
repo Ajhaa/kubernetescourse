@@ -36,6 +36,12 @@ Link to redis docker image when talking about it?
 Why a port in deployment for postgres
 
 
+DELETE FIRST, THEN CHANGE FILES!!11!1!!
+
+same mount point as postgres volume fails
+
+BE patient with ingress in google cloud
+
 ### Nit
 - an context -> a context
 - which container / which containers

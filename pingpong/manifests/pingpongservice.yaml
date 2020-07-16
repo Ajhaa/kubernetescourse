@@ -1,19 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pingpong-svc
+  name: pingpong
   namespace: exercises
 
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: pingpong
   ports:
-    - port: 2300
+    - port: 3000
       name: external
-      protocol: TCP
-      targetPort: 3000
-    - port: 80
-      name: internal
       protocol: TCP
       targetPort: 3000
